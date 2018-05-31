@@ -8,6 +8,7 @@
     'category': 'Warehouse',
     'depends': ['purchase'],
     'data': [
+        'data/scheduler.xml',
     ],
     'installable': True,
     'application': True,
