@@ -10,12 +10,11 @@ class RDQSender(models.TransientModel):
     _description = 'Is called after scheduler to send RFQs'
 
     def send_rfq_emails(self):
+        '''Send draft RFQs via email'''
+
         Mail = self.env['mail.mail']
         RequestOrder = self.env['purchase.order']
 
-        # Send RFQs without user confirmation
-        # going down context -> send_rq = True path
-        # in env['purchase.order'].action_rfq_send()
         email_template = self.env.ref('purchase.email_template_edi_purchase')
         rfqs_to_send = RequestOrder.search([('state', '=', 'draft')])
 
@@ -32,7 +31,6 @@ class RDQSender(models.TransientModel):
 
             # As it auto deletes, the exists() method returns False
             # but incase this changes I'll check state as well
-
             failed_messages_by_rfq = {rfq_by_mail_id[msg.id]: msg
                                       for msg in mail
                                       if msg.exists() and
