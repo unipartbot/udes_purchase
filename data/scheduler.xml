@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="stock.ir_cron_scheduler_action" model="ir.cron">
+    <field name="code">
+model.run_scheduler(True)
+env['anglianwater.rfq_sender'].send_rfq_emails()
+    </field>
+    <field eval="True" name="doall"/>
+  </record>
+</odoo>
